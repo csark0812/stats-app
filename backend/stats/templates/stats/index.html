@@ -1,27 +1,40 @@
-<!-- chat/templates/chat/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
+    <title>Manage Basketball</title>
 </head>
 <body>
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+    <h1>Basketball Management</h1>
+
+    <div>
+        <h2>Actions</h2>
+        <button id="createPlayer">Create Player</button>
+        <button id="createTeam">Create Team</button>
+        <button id="startGame">Start Game</button>
+    </div>
 
     <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
+        // Assuming you'll add event listeners to the buttons to handle the actions.
+        document.getElementById('createPlayer').addEventListener('click', function() {
+            // Redirect or perform action to create a player.
+            // For example: window.location.href = '/create-player/';
+            window.location.pathname = 'stats/players/';
+        });
 
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/stats/' + roomName + '/';
-        };
+        document.getElementById('createTeam').addEventListener('click', function() {
+            // Redirect or perform action to create a team.
+            // For example: window.location.href = '/create-team/';
+            window.location.pathname = 'stats/teams/';
+
+        });
+
+        document.getElementById('startGame').addEventListener('click', function() {
+            // Redirect or perform action to start a game.
+            // For example: window.location.href = '/start-game/';
+            window.location.pathname = 'stats/newgame/';
+
+        });
     </script>
 </body>
 </html>

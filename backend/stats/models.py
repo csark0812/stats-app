@@ -1,7 +1,7 @@
 # In your app's models.py file
 
 from django.db import models
-
+from . import validators
 
 class Team(models.Model):
     name = models.CharField(max_length=255)
@@ -17,10 +17,19 @@ class Player(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     jersey_number = models.PositiveIntegerField()
-    height = models.CharField(max_length=20)
+    height = models.CharField(max_length=20, validators=[validators.validate_height])
     # image = models.ImageField(upload_to='player_images/')
-    team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    position = models.CharField(max_length=50)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, null=True,blank=True)
+    POSITION_CHOICES = [
+        ('G', 'Guard'),
+        ('F', 'Forward'),
+        ('PG', 'Point Guard'),
+        ('SG', 'Shooting Guard'),
+        ('SF', 'Small Forward'),
+        ('PF', 'Power Forward'),
+        ('C', 'Center'),
+    ]
+    position = models.CharField(max_length=2, choices=POSITION_CHOICES)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
