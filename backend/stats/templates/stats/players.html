@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player List</title>
+</head>
+<body>
+    <h1>Player List</h1>
+    
+    <h2>Add New Player</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ player_form.as_p }}
+        <button type="submit">Add Player</button>
+    </form>
+
+    <h2>All Players</h2>
+    <ul>
+        {% for player in players_list %}
+            <li>{{ player.first_name }} {{ player.last_name }} - Jersey Number: {{ player.jersey_number }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
