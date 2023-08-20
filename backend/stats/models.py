@@ -8,6 +8,7 @@ from datetime import timedelta
 class League(models.Model):
     league_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)  # Name of the league
+    is_open = models.BooleanField() 
     foul_out = models.PositiveIntegerField()  # Number of fouls needed to foul out
     bonus_foul_amt = models.PositiveIntegerField()  # Number of fouls for bonus free throws
     dbl_bonus_foul_amt = models.PositiveIntegerField()  # Number of fouls for double bonus free throws
@@ -22,6 +23,16 @@ class League(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        # Check if any other League instance already has is_open set to True
+        if self.is_open:
+            existing_open_league = League.objects.filter(is_open=True).exclude(pk=self.pk).first()
+            if existing_open_league:
+                existing_open_league.is_open = False
+                existing_open_league.save()
+
+        super().save(*args, **kwargs)
 
 class Season(models.Model):
     season_id = models.AutoField(primary_key=True)

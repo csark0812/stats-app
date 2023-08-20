@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
+from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from . import filters
 from . import models
 from . import forms
 from . import serializers
@@ -7,6 +10,8 @@ from . import serializers
 class LeagueViewSet(viewsets.ModelViewSet):
     queryset = models.League.objects.all()
     serializer_class = serializers.LeagueSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.LeagueFilter
 
 class SeasonViewSet(viewsets.ModelViewSet):
     queryset = models.Season.objects.all()

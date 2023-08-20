@@ -27,12 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Replace with your React app's URL
+    # Add more origins if needed
+]
 # Application definition
 
 INSTALLED_APPS = [
     "daphne",
     "channels",
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -50,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
