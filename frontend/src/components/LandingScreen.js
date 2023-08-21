@@ -13,14 +13,13 @@ const LandingScreen = () => {
     // Navigate to the first route when Button 1 is clicked
     api.get('/leagues/?is_open=true')
     .then(response => {
-      sessionStorage.setItem('league',JSON.stringify(response.data[0]));
-      console.log(JSON.parse(sessionStorage.getItem('league')));
-
+      const league = response.data[0]
+      sessionStorage.setItem('league',JSON.stringify(league));
+      navigate(`/${encodeURIComponent(league.name)}`);
     })
     .catch(error => {
       console.error('Error fetching leagues:', error);
     });
-    navigate('/open');
   };
 
 

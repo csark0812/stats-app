@@ -16,6 +16,8 @@ class LeagueViewSet(viewsets.ModelViewSet):
 class SeasonViewSet(viewsets.ModelViewSet):
     queryset = models.Season.objects.all()
     serializer_class = serializers.SeasonSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.SeasonFilter
 
 class DivisionViewSet(viewsets.ModelViewSet):
     queryset = models.Division.objects.all()
@@ -23,7 +25,9 @@ class DivisionViewSet(viewsets.ModelViewSet):
 
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = models.Team.objects.all()
-    serializer_class = serializers.TeamSeasonSerializer
+    serializer_class = serializers.TeamSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.TeamFilter
 
 class TeamSeasonViewSet(viewsets.ModelViewSet):
     queryset = models.TeamSeason.objects.all()

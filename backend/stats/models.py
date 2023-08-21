@@ -38,6 +38,8 @@ class Season(models.Model):
     season_id = models.AutoField(primary_key=True)
     league = models.ForeignKey(League, on_delete=models.CASCADE, related_name='seasons')
     name = models.CharField(max_length=100) # Name of the season
+    is_complete = models.BooleanField() 
+
     def __str__(self):
         return self.name
 

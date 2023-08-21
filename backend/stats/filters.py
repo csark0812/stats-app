@@ -9,3 +9,23 @@ class LeagueFilter(filters.FilterSet):
             'name': ['exact', 'icontains'],
             'is_open': ['exact'],
         }
+
+class SeasonFilter(filters.FilterSet):
+    class Meta:
+        model = models.Season
+        fields = {
+            'season_id': ['exact'],
+            'league': ['exact'],
+            'name': ['exact', 'icontains'],
+            'is_complete': ['exact'],
+        }
+
+class TeamFilter(filters.FilterSet):
+    class Meta:
+        model = models.Team
+        fields = {
+            'team_id': ['exact'],
+            'league': ['exact'],
+            'name': ['exact', 'icontains'],
+            'abbreviation': ['exact', 'icontains'],
+        }

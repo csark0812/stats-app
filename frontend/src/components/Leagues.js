@@ -7,6 +7,7 @@ const Leagues = () => {
   const [leagues, setLeagues] = useState([]);
   const navigate = useNavigate()
   useEffect(() => {
+    
     // Make the API call to fetch the list of leagues
     api.get('/leagues/?is_open=false')
       .then(response => {
@@ -22,7 +23,7 @@ const Leagues = () => {
       .then(response => {
         const league = response.data[0]; // Assuming the response is a list with one league
         sessionStorage.setItem('league', JSON.stringify(league));
-        navigate(`/league/${league.name}`);
+        navigate(`/${encodeURIComponent(league.name)}`);
       })
       .catch(error => {
         console.error('Error fetching league:', error);
@@ -35,7 +36,7 @@ const Leagues = () => {
       <ul>
         {leagues.map(league => (
           <li key={league.league_id}> 
-            <button   onClick={() => handleLeagueClick(league.league_id, league.name)}>{league.name}</button>
+            <button   onClick={() => handleLeagueClick(league.league_id)}>{league.name}</button>
           </li>
         ))}
       </ul>
