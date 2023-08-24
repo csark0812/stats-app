@@ -1,6 +1,58 @@
 from django.shortcuts import render, redirect
+from rest_framework import viewsets
+from django_filters import rest_framework as filters
+from django_filters.rest_framework import DjangoFilterBackend
+from . import filters
 from . import models
 from . import forms
+from . import serializers
+
+class LeagueViewSet(viewsets.ModelViewSet):
+    queryset = models.League.objects.all()
+    serializer_class = serializers.LeagueSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.LeagueFilter
+
+class SeasonViewSet(viewsets.ModelViewSet):
+    queryset = models.Season.objects.all()
+    serializer_class = serializers.SeasonSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.SeasonFilter
+
+class DivisionViewSet(viewsets.ModelViewSet):
+    queryset = models.Division.objects.all()
+    serializer_class = serializers.DivisionSerializer
+
+class TeamViewSet(viewsets.ModelViewSet):
+    queryset = models.Team.objects.all()
+    serializer_class = serializers.TeamSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = filters.TeamFilter
+
+class TeamSeasonViewSet(viewsets.ModelViewSet):
+    queryset = models.TeamSeason.objects.all()
+    serializer_class = serializers.TeamSeasonSerializer
+
+class PlayerViewSet(viewsets.ModelViewSet):
+    queryset = models.Player.objects.all()
+    serializer_class = serializers.PlayerSerializer
+
+class PlayerSeasonViewSet(viewsets.ModelViewSet):
+    queryset = models.PlayerSeason.objects.all()
+    serializer_class = serializers.PlayerSeasonSerializer
+
+class GameViewSet(viewsets.ModelViewSet):
+    queryset = models.Game.objects.all()
+    serializer_class = serializers.GameSerializer
+
+class StatLineViewSet(viewsets.ModelViewSet):
+    queryset = models.StatLine.objects.all()
+    serializer_class = serializers.StatLineSerializer
+
+class RecordedStatViewSet(viewsets.ModelViewSet):
+    queryset = models.RecordedStat.objects.all()
+    serializer_class = serializers.RecordedStatSerializer
+
 
 # Create your views here.
 def index(request):

@@ -1,6 +1,11 @@
 from . import models
 from django.contrib import admin
+from django.apps import apps
 
-admin.site.register(models.Player)
-admin.site.register(models.Team)
-admin.site.register(models.Game)
+models = apps.get_models()
+
+for model in models:
+    try:
+        admin.site.register(model)
+    except admin.sites.AlreadyRegistered:
+        pass
